@@ -1,43 +1,26 @@
+const express = require('express');
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const fs = require('fs');
 const path = require('path');
-const qrcode = require('qrcode');
-const express = require('express');
-const app = express();
-const port = 3000;  // Você pode alterar a porta se necessário
+const qrcode = require('qrcode-terminal');
 
 // Cria uma nova instância do cliente do WhatsApp
 const client = new Client({
     authStrategy: new LocalAuth()
 });
 
-// Cria uma rota para a página inicial
-app.get('/', (req, res) => {
-    // Exibe a página inicial com a instrução para escanear o QR Code
-    res.send('<h1>Por favor, escaneie o QR Code abaixo para conectar o WhatsApp:</h1><img src="/qr.png" alt="QR Code">');
-});
-
-// Cria uma rota para servir o arquivo do QR Code
-app.get('/qr.png', (req, res) => {
-    const qrImagePath = path.join(__dirname, 'qr.png');
-    res.sendFile(qrImagePath);  // Serve o arquivo de imagem gerado do QR Code
-});
-
-// Gera e salva o QR Code como uma imagem
-client.on('qr', (qr) => {
-    const qrImagePath = path.join(__dirname, 'qr.png');
-    qrcode.toFile(qrImagePath, qr, (err) => {
-        if (err) {
-            console.error('Erro ao gerar QR Code:', err);
-        } else {
-            console.log('QR Code gerado em qr.png');
-        }
-    });
-});
+// Configuração do servidor Express
+const app = express();
+const port = process.env.PORT || 3000;  // Usando a porta dinâmica fornecida pelo Render
 
 // Quando o cliente estiver pronto, exibe uma mensagem no console
 client.on('ready', () => {
     console.log('Cliente WhatsApp pronto!');
+});
+
+// Gera e exibe um QR code no terminal para autenticação
+client.on('qr', (qr) => {
+    qrcode.generate(qr, { small: true });
 });
 
 // Responde a mensagens recebidas e salva as conversas em um arquivo .txt
@@ -64,7 +47,7 @@ client.on('message', async (message) => {
 });
 
 // Rota de saúde (verifica se o servidor está funcionando)
-app.get('/status', (req, res) => {
+app.get('/', (req, res) => {
     res.send('Bot WhatsApp funcionando!');
 });
 
