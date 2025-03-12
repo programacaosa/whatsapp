@@ -16,44 +16,52 @@ client.on('ready', () => {
     console.log('Cliente WhatsApp pronto!');
 });
 
-// Gera e salva o QR Code como imagem para autenticação
-client.on('qr', (qr) => {
-    const qrCodePath = path.join(__dirname, 'qr-code.png');
+// Função para carregar as respostas do arquivo
+function loadResponses() {
+    // Caminho para o arquivo 'responses.txt' que está no repositório Git
+    const responsesPath = path.join(__dirname, 'responses.txt');
+    
+    // Verifica se o arquivo existe
+    if (!fs.existsSync(responsesPath)) {
+        console.error("O arquivo 'responses.txt' não foi encontrado.");
+        return {};
+    }
+    
+    const responses = fs.readFileSync(responsesPath, 'utf-8').split('\n');
+    const responseMap = {};
 
-    // Gera a imagem do QR Code e salva no arquivo
-    qrcode.toFile(qrCodePath, qr, {
-        color: {
-            dark: '#000000',  // Cor do QR Code
-            light: '#FFFFFF'  // Cor do fundo
-        }
-    }, (err) => {
-        if (err) {
-            console.error('Erro ao gerar o QR Code:', err);
-        } else {
-            console.log('QR Code gerado e salvo como qr-code.png');
-        }
-    });
-});
-
-// Evento para capturar as mensagens recebidas
-client.on('message', (message) => {
-    const messageText = message.body;
-    const senderNumber = message.from;
-
-    // Caminho do arquivo onde as mensagens serão salvas
-    const logFilePath = path.join(__dirname, 'messages.txt');
-
-    // Formatação da mensagem
-    const logMessage = `Telefone: ${senderNumber}, Mensagem: ${messageText}\n`;
-
-    // Escreve a mensagem no arquivo de texto
-    fs.appendFile(logFilePath, logMessage, (err) => {
-        if (err) {
-            console.error('Erro ao salvar a mensagem:', err);
-        } else {
-            console.log('Mensagem salva com sucesso!');
+    // Cria um mapa de respostas
+    responses.forEach(response => {
+        const [keyword, reply] = response.split('|');
+        if (keyword && reply) {
+            responseMap[keyword.trim().toLowerCase()] = reply.trim();
         }
     });
+
+    return responseMap;
+}
+
+// Carregar as respostas do arquivo
+const responses = loadResponses();
+
+// Quando uma nova mensagem chega
+client.on('message', async (message) => {
+    const chat = await message.getChat();
+    const contactNumber = chat.id.user; // Número do contato
+
+    // Formatar a mensagem para salvar no arquivo
+    const messageText = `${new Date().toLocaleString()}: ${message.body}\n`;
+
+    // Salvar a mensagem no arquivo correspondente
+    const filePath = path.join(__dirname, `${contactNumber}.txt`);
+    fs.appendFileSync(filePath, messageText);
+    console.log(`Conversa salva em: ${filePath}`);
+
+    // Buscar por uma correspondência no arquivo de respostas
+    const response = responses[message.body.toLowerCase()] || "Desculpe, não entendi.";
+
+    // Enviar a resposta
+    await message.reply(response);
 });
 
 // Rota para acessar o QR Code gerado
