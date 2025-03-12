@@ -1,3 +1,4 @@
 bom dia|Bom dia! Como posso ajudá-lo hoje?
 oi|Olá! Como posso ajudar você hoje?
-ajuda|Claro! O que você precisa?
+ajuda|Claro! O que você precisa
+Preciso de atendimento/Claro como posso ajudar?
