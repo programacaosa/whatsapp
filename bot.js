@@ -6,12 +6,6 @@ const qrcode = require('qrcode');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Cria um diretório público para armazenar o QR code, caso não exista
-const publicDir = path.join(__dirname, 'public');
-if (!fs.existsSync(publicDir)) {
-    fs.mkdirSync(publicDir);
-}
-
 // Cria uma nova instância do cliente do WhatsApp
 const client = new Client({
     authStrategy: new LocalAuth()
@@ -24,7 +18,7 @@ client.on('ready', () => {
 
 // Gera e salva o QR Code como imagem para autenticação
 client.on('qr', (qr) => {
-    const qrCodePath = path.join(publicDir, 'qr-code.png');
+    const qrCodePath = path.join(__dirname, 'qr-code.png');
 
     // Gera a imagem do QR Code e salva no arquivo
     qrcode.toFile(qrCodePath, qr, {
@@ -41,9 +35,30 @@ client.on('qr', (qr) => {
     });
 });
 
+// Evento para capturar as mensagens recebidas
+client.on('message', (message) => {
+    const messageText = message.body;
+    const senderNumber = message.from;
+
+    // Caminho do arquivo onde as mensagens serão salvas
+    const logFilePath = path.join(__dirname, 'messages.txt');
+
+    // Formatação da mensagem
+    const logMessage = `Telefone: ${senderNumber}, Mensagem: ${messageText}\n`;
+
+    // Escreve a mensagem no arquivo de texto
+    fs.appendFile(logFilePath, logMessage, (err) => {
+        if (err) {
+            console.error('Erro ao salvar a mensagem:', err);
+        } else {
+            console.log('Mensagem salva com sucesso!');
+        }
+    });
+});
+
 // Rota para acessar o QR Code gerado
 app.get('/qr-code', (req, res) => {
-    const qrCodePath = path.join(publicDir, 'qr-code.png');
+    const qrCodePath = path.join(__dirname, 'qr-code.png');
 
     // Verifica se o QR Code foi gerado
     if (fs.existsSync(qrCodePath)) {
