@@ -1,29 +1,34 @@
 const express = require('express');
-const { Client, LocalAuth, MessageMedia } = require('whatsapp-web.js');
+const { Client, LocalAuth } = require('whatsapp-web.js');
 const fs = require('fs');
 const path = require('path');
 const qrcode = require('qrcode');
 const app = express();
 const port = process.env.PORT || 3000;
 
+// Cria uma nova instância do cliente do WhatsApp
 const client = new Client({
     authStrategy: new LocalAuth()
 });
 
+// Caminho para o arquivo responses.txt
 const responsesFilePath = path.join(__dirname, 'responses.txt');
 
-// Função para carregar respostas
+// Função para carregar as respostas do arquivo responses.txt
 function loadResponses() {
     try {
         const fileContent = fs.readFileSync(responsesFilePath, 'utf-8');
         const lines = fileContent.split('\n').filter(line => line.trim() !== '');
         const responses = {};
+
+        // Processa cada linha do arquivo
         lines.forEach(line => {
             const [keyword, response] = line.split('|').map(item => item.trim());
             if (keyword && response) {
-                responses[keyword.toLowerCase()] = response;
+                responses[keyword.toLowerCase()] = response; // Armazena em letras minúsculas
             }
         });
+
         return responses;
     } catch (error) {
         console.error('Erro ao ler o arquivo responses.txt:', error);
@@ -31,20 +36,23 @@ function loadResponses() {
     }
 }
 
+// Carrega as respostas do arquivo
 let responses = loadResponses();
 
-// Quando cliente estiver pronto
+// Quando o cliente estiver pronto, exibe uma mensagem no console
 client.on('ready', () => {
     console.log('Cliente WhatsApp pronto!');
 });
 
-// Geração de QR Code
+// Gera e salva o QR Code como imagem para autenticação
 client.on('qr', (qr) => {
     const qrCodePath = path.join(__dirname, 'qr-code.png');
+
+    // Gera a imagem do QR Code e salva no arquivo
     qrcode.toFile(qrCodePath, qr, {
         color: {
-            dark: '#000000',
-            light: '#FFFFFF'
+            dark: '#000000',  // Cor do QR Code
+            light: '#FFFFFF'  // Cor do fundo
         }
     }, (err) => {
         if (err) {
@@ -55,72 +63,45 @@ client.on('qr', (qr) => {
     });
 });
 
-// Manipulação de mensagens
+// Manipula mensagens recebidas
 client.on('message', async (message) => {
-    const text = message.body.toLowerCase();
+    const text = message.body.toLowerCase(); // Converte a mensagem para minúsculas
 
-    // ⚙️ Verifica o comando "foto" ou "imagem"
-    if (text.includes('foto') || text.includes('imagem')) {
-        const fotosDir = path.join(__dirname, 'fotos');
-
-        // Verifica se a pasta de fotos existe
-        if (fs.existsSync(fotosDir)) {
-            const fotos = fs.readdirSync(fotosDir).filter(file => {
-                return /\.(jpg|jpeg|png|gif)$/i.test(file); // Aceita apenas imagens
-            });
-
-            if (fotos.length > 0) {
-                // Seleciona uma imagem aleatória
-                const randomFoto = fotos[Math.floor(Math.random() * fotos.length)];
-                const fotoPath = path.join(fotosDir, randomFoto);
-
-                // Carrega e envia a imagem
-                const media = await MessageMedia.fromFilePath(fotoPath);
-                await message.reply(media);
-                console.log(`Enviada imagem: ${randomFoto}`);
-            } else {
-                await message.reply('Nenhuma imagem encontrada na pasta de fotos.');
-                console.log('Pasta de fotos está vazia.');
-            }
-        } else {
-            await message.reply('Pasta de fotos não encontrada no servidor.');
-            console.log('Pasta de fotos não encontrada.');
-        }
-        return; // Interrompe o restante do processamento para não responder duas vezes
-    }
-
-    // 🔑 Verifica palavras-chave do responses.txt
+    // Verifica se há uma palavra-chave correspondente
     for (const keyword in responses) {
         if (text.includes(keyword)) {
             const response = responses[keyword];
-            await message.reply(response);
+            await message.reply(response); // Responde automaticamente
             console.log(`Respondido: ${response}`);
             return;
         }
     }
 
+    // Caso não encontre nenhuma palavra-chave
     console.log('Mensagem sem correspondência:', message.body);
 });
 
-// Rota para visualizar QR Code
+// Rota para acessar o QR Code gerado
 app.get('/qr-code', (req, res) => {
     const qrCodePath = path.join(__dirname, 'qr-code.png');
+
+    // Verifica se o QR Code foi gerado
     if (fs.existsSync(qrCodePath)) {
-        res.sendFile(qrCodePath);
+        res.sendFile(qrCodePath);  // Serve o arquivo como resposta
     } else {
         res.status(404).send('QR Code não encontrado');
     }
 });
 
-// Rota de saúde
+// Rota de saúde (verifica se o servidor está funcionando)
 app.get('/', (req, res) => {
     res.send('Bot WhatsApp funcionando!');
 });
 
-// Inicia o servidor
+// Inicia o servidor Express na porta definida
 app.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`);
 });
 
-// Inicializa o cliente
+// Inicia o cliente do WhatsApp
 client.initialize();
