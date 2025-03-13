@@ -3,7 +3,7 @@ olá|Olá! Tudo bem? Me diga como posso ajudar você hoje.
 bom dia|Bom dia! Espero que seu dia seja incrível. Precisa de alguma informação?
 boa tarde|Boa tarde! Em que posso ajudar você?
 boa noite|Boa noite! Como posso te ajudar?
-tudo bem|Tudo ótimo por aqui! E com você?
+tudo bem?|Tudo ótimo por aqui! E com você?
 qual seu nome|Eu sou um assistente virtual, pronto para te ajudar!
 quem é você|Eu sou um bot automatizado, pronto para responder suas dúvidas.
 horário|Nosso horário de atendimento é de segunda a sexta, das 8h às 18h.
