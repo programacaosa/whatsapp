@@ -1,10 +1,43 @@
-Boa tarde Anderson|Olá! Seja bem-vindo(a)! Por favor, escolha uma das opções abaixo, respondendo com o número:\n\n1️⃣ Primeiro atendimento\n2️⃣ Já sou cliente\n3️⃣ Preciso de atualizações sobre meu projeto\n4️⃣ Finalizar atendimento
-oi|Olá! Seja bem-vindo(a)! Por favor, escolha uma das opções abaixo, respondendo com o número:\n\n1️⃣ Primeiro atendimento\n2️⃣ Já sou cliente\n3️⃣ Preciso de atualizações sobre meu projeto\n4️⃣ Finalizar atendimento
-olá|Olá! Seja bem-vindo(a)! Por favor, escolha uma das opções abaixo, respondendo com o número:\n\n1️⃣ Primeiro atendimento\n2️⃣ Já sou cliente\n3️⃣ Preciso de atualizações sobre meu projeto\n4️⃣ Finalizar atendimento
-bom dia|Bom dia! Seja bem-vindo(a)! Por favor, escolha uma das opções abaixo, respondendo com o número:\n\n1️⃣ Primeiro atendimento\n2️⃣ Já sou cliente\n3️⃣ Preciso de atualizações sobre meu projeto\n4️⃣ Finalizar atendimento
-boa tarde|Boa tarde! Seja bem-vindo(a)! Por favor, escolha uma das opções abaixo, respondendo com o número:\n\n1️⃣ Primeiro atendimento\n2️⃣ Já sou cliente\n3️⃣ Preciso de atualizações sobre meu projeto\n4️⃣ Finalizar atendimento
-boa noite|Boa noite! Seja bem-vindo(a)! Por favor, escolha uma das opções abaixo, respondendo com o número:\n\n1️⃣ Primeiro atendimento\n2️⃣ Já sou cliente\n3️⃣ Preciso de atualizações sobre meu projeto\n4️⃣ Finalizar atendimento
-1|Ótimo! Seja bem-vindo(a)! Para começarmos, por favor, me informe seu nome completo e o serviço que deseja conhecer. Em breve, um atendente entrará em contato para dar continuidade.
-2|Perfeito! Para localizar seu cadastro, por favor, me informe seu nome completo ou o número do pedido/projeto. Assim, consigo direcionar você para o atendimento correto.
-3|Certo! Para verificar as atualizações do seu projeto, me envie o número do pedido/projeto ou o nome completo que está em nosso sistema. Vou conferir para você!
-4|Tudo bem! Seu atendimento foi finalizado. Caso precise de algo mais, é só me chamar novamente. Tenha um ótimo dia! ✨
+Boa tarde Anderson|Olá! Seja bem-vindo(a)! Por favor, escolha uma das opções abaixo, respondendo com o número:  
+1️⃣ Primeiro atendimento  
+2️⃣ Já sou cliente  
+3️⃣ Preciso de atualizações sobre meu projeto  
+4️⃣ Finalizar atendimento  
+
+oi|Olá! Seja bem-vindo(a)! Por favor, escolha uma das opções abaixo, respondendo com o número:  
+1️⃣ Primeiro atendimento  
+2️⃣ Já sou cliente  
+3️⃣ Preciso de atualizações sobre meu projeto  
+4️⃣ Finalizar atendimento  
+
+olá|Olá! Seja bem-vindo(a)! Por favor, escolha uma das opções abaixo, respondendo com o número:  
+1️⃣ Primeiro atendimento  
+2️⃣ Já sou cliente  
+3️⃣ Preciso de atualizações sobre meu projeto  
+4️⃣ Finalizar atendimento  
+
+bom dia|Bom dia! Seja bem-vindo(a)! Por favor, escolha uma das opções abaixo, respondendo com o número:  
+1️⃣ Primeiro atendimento  
+2️⃣ Já sou cliente  
+3️⃣ Preciso de atualizações sobre meu projeto  
+4️⃣ Finalizar atendimento  
+
+boa tarde|Boa tarde! Seja bem-vindo(a)! Por favor, escolha uma das opções abaixo, respondendo com o número:  
+1️⃣ Primeiro atendimento  
+2️⃣ Já sou cliente  
+3️⃣ Preciso de atualizações sobre meu projeto  
+4️⃣ Finalizar atendimento  
+
+boa noite|Boa noite! Seja bem-vindo(a)! Por favor, escolha uma das opções abaixo, respondendo com o número:  
+1️⃣ Primeiro atendimento  
+2️⃣ Já sou cliente  
+3️⃣ Preciso de atualizações sobre meu projeto  
+4️⃣ Finalizar atendimento  
+
+1|Ótimo! Seja bem-vindo(a)! Para começarmos, por favor, me informe seu nome completo e o serviço que deseja conhecer. Em breve, um atendente entrará em contato para dar continuidade.  
+
+2|Perfeito! Para localizar seu cadastro, por favor, me informe seu nome completo ou o número do pedido/projeto. Assim, consigo direcionar você para o atendimento correto.  
+
+3|Certo! Para verificar as atualizações do seu projeto, me envie o número do pedido/projeto ou o nome completo que está em nosso sistema. Vou conferir para você!  
+
+4|Tudo bem! Seu atendimento foi finalizado. Caso precise de algo mais, é só me chamar novamente. Tenha um ótimo dia! ✨  
