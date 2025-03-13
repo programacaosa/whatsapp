@@ -1,3 +1,4 @@
+Boa tarde Anderson|Olá! Seja bem-vindo(a)! Por favor, escolha uma das opções abaixo, respondendo com o número:\n\n1️⃣ Primeiro atendimento\n2️⃣ Já sou cliente\n3️⃣ Preciso de atualizações sobre meu projeto\n4️⃣ Finalizar atendimento
 oi|Olá! Seja bem-vindo(a)! Por favor, escolha uma das opções abaixo, respondendo com o número:\n\n1️⃣ Primeiro atendimento\n2️⃣ Já sou cliente\n3️⃣ Preciso de atualizações sobre meu projeto\n4️⃣ Finalizar atendimento
 olá|Olá! Seja bem-vindo(a)! Por favor, escolha uma das opções abaixo, respondendo com o número:\n\n1️⃣ Primeiro atendimento\n2️⃣ Já sou cliente\n3️⃣ Preciso de atualizações sobre meu projeto\n4️⃣ Finalizar atendimento
 bom dia|Bom dia! Seja bem-vindo(a)! Por favor, escolha uma das opções abaixo, respondendo com o número:\n\n1️⃣ Primeiro atendimento\n2️⃣ Já sou cliente\n3️⃣ Preciso de atualizações sobre meu projeto\n4️⃣ Finalizar atendimento
