@@ -1,3 +1,4 @@
+Boa tarde anderson/ Olá, boa tarde, como posso ajudar?
 oi|Olá! Seja bem-vindo, como posso te ajudar?
 olá|Olá! Tudo bem? Me diga como posso ajudar você hoje.
 bom dia|Bom dia! Espero que seu dia seja incrível. Precisa de alguma informação?
