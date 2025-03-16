@@ -4,7 +4,6 @@ const puppeteer = require('puppeteer-core'); // Importando puppeteer-core para p
 const fs = require('fs');
 const path = require('path');
 const qrcode = require('qrcode');
-const puppeteer = require('puppeteer-core');  // Adicione o puppeteer-core
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -15,7 +14,7 @@ const chromiumPath = '/usr/bin/chromium-browser'; // Altere para o caminho corre
 const client = new Client({
     authStrategy: new LocalAuth(),
     puppeteer: {
-        executablePath: '/usr/bin/chromium-browser'  // Caminho do Chromium instalado no seu sistema
+        executablePath: chromiumPath  // Usando a variável para o caminho do Chromium
     }
 });
 
