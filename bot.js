@@ -1,5 +1,6 @@
 const express = require('express');
 const { Client, LocalAuth } = require('whatsapp-web.js');
+const puppeteer = require('puppeteer-core'); // Importando puppeteer-core para poder configurar o navegador
 const fs = require('fs');
 const path = require('path');
 const qrcode = require('qrcode');
@@ -14,9 +15,7 @@ const chromiumPath = '/usr/bin/chromium-browser'; // Altere para o caminho corre
 const client = new Client({
     authStrategy: new LocalAuth(),
     puppeteer: {
-        executablePath: chromiumPath,  // Especificando o caminho do Chromium
-        headless: true,                // Rodar em modo headless (sem interface gráfica)
-        args: ['--no-sandbox', '--disable-setuid-sandbox']  // Argumentos recomendados para rodar em servidores
+        executablePath: '/usr/bin/chromium-browser'  // Caminho do Chromium instalado no seu sistema
     }
 });
 
