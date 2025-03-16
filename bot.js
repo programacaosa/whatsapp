@@ -3,12 +3,21 @@ const { Client, LocalAuth } = require('whatsapp-web.js');
 const fs = require('fs');
 const path = require('path');
 const qrcode = require('qrcode');
+const puppeteer = require('puppeteer-core');  // Adicione o puppeteer-core
 const app = express();
 const port = process.env.PORT || 3000;
 
+// Caminho do Chromium
+const chromiumPath = '/usr/bin/chromium-browser'; // Altere para o caminho correto se necessário
+
 // Cria uma nova instância do cliente do WhatsApp
 const client = new Client({
-    authStrategy: new LocalAuth()  // Usando a estratégia de autenticação local sem Chromium
+    authStrategy: new LocalAuth(),
+    puppeteer: {
+        executablePath: chromiumPath,  // Especificando o caminho do Chromium
+        headless: true,                // Rodar em modo headless (sem interface gráfica)
+        args: ['--no-sandbox', '--disable-setuid-sandbox']  // Argumentos recomendados para rodar em servidores
+    }
 });
 
 // Caminho para o arquivo responses.txt
