@@ -8,7 +8,7 @@ const port = process.env.PORT || 3000;
 
 // Cria uma nova instância do cliente do WhatsApp
 const client = new Client({
-    authStrategy: new LocalAuth()
+    authStrategy: new LocalAuth()  // Usando a estratégia de autenticação local sem Chromium
 });
 
 // Caminho para o arquivo responses.txt
